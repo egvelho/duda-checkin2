@@ -1,17 +1,18 @@
 import "./globals.css";
-import Button from "@/components/button";
+import Footer from "./footer";
+import Header from "./header";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html>
       <body>
-        <header className="bg-white text-black w-full p-4">
-          sou o cabeçalho
-          <Button>Criar conta</Button>
-          <Button>Entrar</Button>
-        </header>
-        <div className="bg-amber-600">{children}</div>
-        <footer>sou o rodapé</footer>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
