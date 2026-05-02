@@ -5,7 +5,7 @@ import { Timer, FileText, Users, ChevronRight } from "lucide-react";
 
 const texts = {
   hero: {
-    title: "Registro de presenças com QRCode",
+    title: "Registro de presenças",
     titleHighlight: "que é grátis e FOSS",
     description:
       "Criei essa parada porque não aguentava mais ver um monte de app lixoso tentando me arrancar dinheiro. Isso aqui é grátis e eu não tô nem aí se tu vai usar pra aula, evento ou sei-lá-mais-o-quê. Só quero que ninguém mais tenha que perder tempo procurando uma ferramenta pra resolver um problema estupidamente simples como este.",
@@ -49,9 +49,29 @@ type Feature = {
   colorClass: string;
 };
 
+type RetanguloProps = {
+  width: string;
+  height: string;
+  bgColor?: string;
+};
+
+function Retangulo({ width, height, bgColor = "red" }: RetanguloProps) {
+  return (
+    <div
+      style={{
+        width,
+        height,
+        backgroundColor: bgColor,
+      }}
+    ></div>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white pt-16">
+      {/* {<Retangulo width="200px" height="150px" />
+      <Retangulo width="50px" height="30px" bgColor="#202020" />} */}
       <HeroSection />
       <FeaturesSection />
     </main>
