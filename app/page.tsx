@@ -18,16 +18,16 @@ const texts = {
     title: "Por que tu precisaria usar esta parada?",
     items: [
       {
-        title: "Serve pra fazer a chamada rapidinho",
+        title: "Serve pra fazer a chamada rapidinho e tem até lasers",
         description:
-          "Tu mostra o QRCode a galera escaneia e tá safe. Não vou encher teu saco tentando te vender um produto que você não precisa, porque né, não sou as Organizações Tabajara (se tu não pegou essa referência, meu bom, é porque te falta ódio).",
+          "Tu mostra o QRCode a galera escaneia e tá safe. Não vou encher teu saco tentando te vender um produto que você não precisa, porque né, não sou as Organizações Tabajara (se tu não pegou essa referência, meu bom, é porque te falta ódio). Essa referência tu também não pegou, né? Foi moggado.",
         colorClass: "bg-blue-100 text-primary",
         icon: <Timer size={24} />,
       },
       {
-        title: "Exportação de relatórios",
+        title: "Exportação de relatórios (com ou sem doppler)",
         description:
-          "Tu consegue exportar faltas e presenças para os formatos .pdf e .xlsx Afinal, isso aqui pode sair do ar a qualquer momento, né... brincadeira (ou não). Quer dizer, tudo vai acabar um dia, menos esse teu namoro, que já dura anos e não sai do lugar, esse eu boto fé. E só pra não perder o hábito... THE GAME.",
+          "Tu consegue exportar faltas e presenças para os formatos PDF e XLSX. Afinal, isso aqui pode sair do ar a qualquer momento, né... brincadeira (ou não). Quer dizer, tudo vai acabar um dia, menos esse teu namoro, que já dura anos e não sai do lugar, esse eu boto fé. E só pra não perder o hábito... THE GAME.",
         colorClass: "bg-green-100 text-green-600",
         icon: <FileText size={24} />,
       },
