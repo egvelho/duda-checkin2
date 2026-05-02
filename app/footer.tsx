@@ -15,7 +15,7 @@ export default function Footer() {
     <footer className="bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-gray-500 text-sm text-center md:text-left">
+          <div className="text-gray-500 text-sm text-center md:text-left md:max-w-sm lg:max-w-xl">
             {texts.copyright}{" "}
             <span className="font-semibold text-primary">{texts.brand}</span>.{" "}
             {texts.rights}

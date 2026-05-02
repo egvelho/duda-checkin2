@@ -20,21 +20,21 @@ const texts = {
       {
         title: "Serve pra fazer a chamada rapidinho",
         description:
-          "Tu mostra o QRCode a galera escaneia e tá safe. Não vou encher teu saco tentando te vender um produto que você não precisa.",
+          "Tu mostra o QRCode a galera escaneia e tá safe. Não vou encher teu saco tentando te vender um produto que você não precisa, porque né, não sou as Organizações Tabajara (se tu não pegou essa referência, meu bom, é porque te falta ódio).",
         colorClass: "bg-blue-100 text-primary",
         icon: <Timer size={24} />,
       },
       {
         title: "Exportação de relatórios",
         description:
-          "Tu consegue exportar faltas e presenças para os formatos .Pdf e Xlsx. Afinal, isso aqui pode sair do ar a qualquer momento, né... é brincadeira (ou não).",
+          "Tu consegue exportar faltas e presenças para os formatos .Pdf e Xlsx. Afinal, isso aqui pode sair do ar a qualquer momento, né... é brincadeira (ou não). Quer dizer, tudo vai acabar um dia, menos esse teu namoro, que já dura anos e não sai do lugar. Esse tem futuro, cara. E só pra não perder o hábito. THE GAME.",
         colorClass: "bg-green-100 text-green-600",
         icon: <FileText size={24} />,
       },
       {
-        title: "Dá pra registrar todo mundo",
+        title: "Dá pra registrar todo mundo, menos a Luiza...",
         description:
-          "Pode criar quantas turmas/eventos quiser com a tranquilidade de que ninguém vai ficar atrás do seu rico dinheirinho. Talvez eu peça pra você doar pra ajudar a ONG aqui da minha cidade a salvar os gatinhos de rua, mas juro que mais nada além disso.",
+          "...que está no Canadá (tá, parei). Pode criar quantas turmas/eventos quiser com a tranquilidade de que ninguém vai ficar atrás do seu rico dinheirinho. Talvez eu peça pra você doar pra ajudar a ONG aqui da minha cidade a salvar os gatinhos de rua, mas juro que mais nada além disso.",
         colorClass: "bg-purple-100 text-purple-600",
         icon: <Users size={24} />,
       },
