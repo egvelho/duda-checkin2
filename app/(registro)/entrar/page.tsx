@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-
   return (
     <div>
       <form className="flex flex-col gap-2">
