@@ -1,53 +1,52 @@
 "use client";
 
 import { useState } from "react";
+import { Input } from "@/components/input";
+import { Button } from "@/components/button";
+import { Title } from "@/components/title";
+
+const texts = {
+  title: "Entrar na sua conta",
+  placeholders: {
+    email: "Email",
+    password: "Password",
+  },
+  buttons: {
+    signIn: "Sign In",
+  },
+};
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  return (
-    <div>
-      <form className="flex flex-col gap-2">
-        <input
-          type="text"
-          placeholder="Email"
-          className="border rounded-md p-2"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          className="border rounded-md p-2"
-          value={senha}
-          onChange={(event) => {
-            setSenha(event.target.value);
-          }}
-        />
-        <button
-          type="submit"
-          className="bg-amber-600 text-white text-bold rounded-md p-2"
-        >
-          Entrar
-        </button>
-      </form>
-      <BotaoOnOff />
-    </div>
-  );
-}
+  const [password, setPassword] = useState("");
 
-function BotaoOnOff() {
-  const [on, setOn] = useState(true);
-  const label = on ? "Ligado" : "Desligado";
-  const estilo = on ? "bg-red-600" : "bg-blue-600";
+  function onSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
+
   return (
-    <button
-      onClick={() => setOn(!on)}
-      className={`${estilo} text-white rounded-md p-2`}
-    >
-      {label}
-    </button>
+    <div className="flex flex-col max-w-md mx-auto mt-10">
+      <Title className="text-center text-2xl font-bold">{texts.title}</Title>
+      <form className="flex flex-col gap-2" onSubmit={onSubmit}>
+        <Input
+          type="text"
+          placeholder={texts.placeholders.email}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder={texts.placeholders.password}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <Button
+          type="submit"
+          className="bg-amber-600 text-white font-bold rounded-md p-2"
+        >
+          {texts.buttons.signIn}
+        </Button>
+      </form>
+    </div>
   );
 }

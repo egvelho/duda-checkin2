@@ -26,7 +26,7 @@ type ButtonProps = {
   className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
+export function Button({
   variant = "primary",
   size = "md",
   className = "",

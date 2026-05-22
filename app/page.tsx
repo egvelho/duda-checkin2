@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Button from "@/components/button";
-import Card, { CardHeader, CardTitle, CardContent } from "@/components/card";
+import { Button } from "@/components/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/card";
+import { Title } from "@/components/title";
 import { Timer, FileText, Users, ChevronRight } from "lucide-react";
 
 const texts = {
@@ -49,29 +50,9 @@ type Feature = {
   colorClass: string;
 };
 
-type RetanguloProps = {
-  width: string;
-  height: string;
-  bgColor?: string;
-};
-
-function Retangulo({ width, height, bgColor = "red" }: RetanguloProps) {
-  return (
-    <div
-      style={{
-        width,
-        height,
-        backgroundColor: bgColor,
-      }}
-    ></div>
-  );
-}
-
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white pt-16">
-      {/* {<Retangulo width="200px" height="150px" />
-      <Retangulo width="50px" height="30px" bgColor="#202020" />} */}
       <HeroSection />
       <FeaturesSection />
     </main>
@@ -82,11 +63,11 @@ function HeroSection() {
   return (
     <section className="relative py-20 lg:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
+        <Title as="h1" className="text-4xl md:text-6xl font-extrabold">
           <span className="text-primary">{texts.hero.title}</span>
           <br />
           {texts.hero.titleHighlight}
-        </h1>
+        </Title>
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 mb-10">
           {texts.hero.description}
         </p>
@@ -135,9 +116,9 @@ function FeaturesSection() {
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
+          <Title as="h2" className="text-3xl font-bold">
             {texts.featuresSection.title}
-          </h2>
+          </Title>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {texts.featuresSection.items.map((item, index) => (

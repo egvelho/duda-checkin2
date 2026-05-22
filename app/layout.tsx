@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Fira_Sans } from "next/font/google";
-import Footer from "./footer";
-import Header from "./header";
+import { Footer } from "./footer";
+import { Header } from "./header";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],

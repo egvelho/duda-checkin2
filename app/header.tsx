@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 
 const texts = {
   logo: {
@@ -12,9 +12,9 @@ const texts = {
   },
 };
 
-export default function Header() {
+export function Header() {
   return (
-    <nav className="fixed top-0 w-full bg-white shadow-sm z-50">
+    <nav className="sticky top-0 w-full bg-white shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="shrink-0">

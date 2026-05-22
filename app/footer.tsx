@@ -10,7 +10,7 @@ const texts = {
   ],
 };
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
