@@ -41,6 +41,7 @@ export default function SignUpPage() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<CreateAccountFormData>({
     resolver: zodResolver(signUpFormSchema),
     mode: "onBlur",
@@ -56,8 +57,23 @@ export default function SignUpPage() {
     });
 
     const responseJson = await response.json();
+
+    if (response.status === 422) {
+      const errors = responseJson.errors;
+      for (const field in errors.properties) {
+        const [error] = errors.properties[field].errors;
+        console.log(field, error);
+        setError(field, { type: "server", message: error });
+      }
+      const {
+        errors: [serverErrors],
+      } = errors;
+      serverErrors && alert(serverErrors);
+      return;
+    }
+
     alert(responseJson.info);
-    alert(JSON.stringify(responseJson.dados));
+    console.log("Dados salvos:", responseJson.dados);
   }
 
   const nameField = (
