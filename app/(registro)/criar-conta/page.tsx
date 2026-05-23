@@ -47,7 +47,10 @@ export default function SignUpPage() {
     mode: "onBlur",
   });
 
-  async function onSubmit(values: CreateAccountFormData) {
+  async function onSubmit({
+    confirmPassword,
+    ...values
+  }: CreateAccountFormData) {
     const response = await fetch("/api/create-account", {
       method: "POST",
       body: JSON.stringify(values),
