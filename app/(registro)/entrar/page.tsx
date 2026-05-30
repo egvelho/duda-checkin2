@@ -20,8 +20,18 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function onSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    const response = await fetch("/api/login", {
+      body: JSON.stringify({ email, password }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const dados = await response.json();
+    alert(dados.texto);
   }
 
   return (
