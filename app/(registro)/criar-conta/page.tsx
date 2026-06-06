@@ -65,7 +65,6 @@ export default function SignUpPage() {
       const errors = responseJson.errors;
       for (const field in errors.properties) {
         const [error] = errors.properties[field].errors;
-        console.log(field, error);
         setError(field, { type: "server", message: error });
       }
       const {

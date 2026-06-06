@@ -1,9 +1,14 @@
-import { SignJWT, jwtVerify } from "jose";
+import { JWTPayload, SignJWT, jwtVerify } from "jose";
+
+type Payload = {
+  email: string;
+  name: string;
+};
 
 export class JWT {
-  static #secret = new TextEncoder().encode("monarkjacomeco");
+  static #secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-  static async encode(payload: any, expiration = "2h") {
+  static async encode(payload: Payload, expiration = "2h") {
     const token = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
@@ -14,11 +19,7 @@ export class JWT {
   }
 
   static async decode(token: string) {
-    try {
-      const { payload } = await jwtVerify(token, this.#secret);
-      return payload;
-    } catch {
-      return undefined;
-    }
+    const { payload } = await jwtVerify(token, this.#secret);
+    return payload as JWTPayload & Payload;
   }
 }

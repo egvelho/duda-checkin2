@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { delay } from "@/lib/delay";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { Title } from "@/components/title";
+import type { LoginApiResponse } from "@/app/api/login/route";
 
 const texts = {
   title: "Entrar na sua conta",
@@ -17,12 +20,13 @@ const texts = {
 };
 
 export default function SignInPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function onSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const response = await fetch("/api/login", {
+    const fetchResponse = await fetch("/api/login", {
       body: JSON.stringify({ email, password }),
       method: "POST",
       headers: {
@@ -30,8 +34,15 @@ export default function SignInPage() {
       },
     });
 
-    const dados = await response.json();
-    alert(dados.texto);
+    const response: LoginApiResponse = await fetchResponse.json();
+    if (response.success) {
+      alert("Login realizado com sucesso!");
+      router.refresh();
+      await delay(1000);
+      router.replace("/");
+    } else {
+      alert("Usuário ou senha inválidos!");
+    }
   }
 
   return (

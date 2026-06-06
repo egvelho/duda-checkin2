@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/button";
-import { prisma } from "@/lib/prisma";
-import { JWT } from "@/lib/jwt";
-import { cookies } from "next/headers";
+import { IfAuth } from "@/components/if-auth";
+import { Auth } from "@/lib/auth";
 
 const texts = {
   logo: {
@@ -12,20 +11,40 @@ const texts = {
   actions: {
     login: { label: "Entrar", href: "/entrar" },
     register: { label: "Criar conta", href: "/criar-conta" },
+    logout: { label: "Sair", href: "/sair" },
   },
 };
 
 export async function Header() {
-  const sessionCookies = await cookies();
-  const token = sessionCookies.get("SESSION_ID");
-  const payload: any = token && (await JWT.decode(token.value));
-  const user = payload
-    ? await prisma.teacher.findUnique({
-        where: {
-          email: payload.email,
-        },
-      })
-    : {};
+  const user = await Auth.getUser();
+  const isAuth = user !== null;
+  console.log(user, isAuth);
+
+  const guestActions = (
+    <IfAuth auth={!isAuth}>
+      <Link href={texts.actions.login.href}>
+        <Button variant="ghost" size="md">
+          {texts.actions.login.label}
+        </Button>
+      </Link>
+      <Link href={texts.actions.register.href}>
+        <Button variant="primary" size="md">
+          {texts.actions.register.label}
+        </Button>
+      </Link>
+    </IfAuth>
+  );
+
+  const authActions = (
+    <IfAuth auth={isAuth}>
+      {user?.name}
+      <Link href={texts.actions.logout.href}>
+        <Button variant="primary" size="md">
+          {texts.actions.logout.label}
+        </Button>
+      </Link>
+    </IfAuth>
+  );
 
   return (
     <nav className="sticky top-0 w-full bg-white shadow-sm z-50">
@@ -35,30 +54,9 @@ export async function Header() {
             <Logo />
           </div>
 
-          <div className="flex items-center space-x-2">
-            {!user.name && (
-              <Link href={texts.actions.login.href}>
-                <Button variant="ghost" size="md">
-                  {texts.actions.login.label}
-                </Button>
-              </Link>
-            )}
-
-            {!user.name && (
-              <Link href={texts.actions.register.href}>
-                <Button variant="primary" size="md">
-                  {texts.actions.register.label}
-                </Button>
-              </Link>
-            )}
-            {user?.name}
-            {user?.name && (
-              <Link href="/api/logout">
-                <Button variant="primary" size="md">
-                  Sair
-                </Button>
-              </Link>
-            )}
+          <div className="flex items-center space-x-2 gap-2">
+            {guestActions}
+            {authActions}
           </div>
         </div>
       </div>
