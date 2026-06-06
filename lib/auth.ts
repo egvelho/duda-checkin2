@@ -1,6 +1,7 @@
 import { JWT } from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
+import bcrypt from "bcryptjs";
 
 const SESSION_ID = "SESSION_ID";
 
@@ -9,11 +10,16 @@ export class Auth {
     const user = await prisma.teacher.findUnique({
       where: {
         email,
-        password,
       },
     });
 
     if (user === null) {
+      return null;
+    }
+
+    const passwordMatches = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatches) {
       return null;
     }
 

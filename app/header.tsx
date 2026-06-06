@@ -18,7 +18,6 @@ const texts = {
 export async function Header() {
   const user = await Auth.getUser();
   const isAuth = user !== null;
-  console.log(user, isAuth);
 
   const guestActions = (
     <IfAuth auth={!isAuth}>

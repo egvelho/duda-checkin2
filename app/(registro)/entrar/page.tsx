@@ -35,6 +35,7 @@ export default function SignInPage() {
     });
 
     const response: LoginApiResponse = await fetchResponse.json();
+
     if (response.success) {
       alert("Login realizado com sucesso!");
       router.refresh();

@@ -8,6 +8,7 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { FormError } from "@/components/form-error";
 import { Title } from "@/components/title";
+import type { CreateAccountApiResponse } from "@/app/api/create-account/route";
 
 const texts = {
   title: "Criar conta",
@@ -51,7 +52,7 @@ export default function SignUpPage() {
     confirmPassword,
     ...values
   }: CreateAccountFormData) {
-    const response = await fetch("/api/create-account", {
+    const fetchResponse = await fetch("/api/create-account", {
       method: "POST",
       body: JSON.stringify(values),
       headers: {
@@ -59,13 +60,13 @@ export default function SignUpPage() {
       },
     });
 
-    const responseJson = await response.json();
+    const response: CreateAccountApiResponse = await fetchResponse.json();
 
-    if (response.status === 422) {
-      const errors = responseJson.errors;
+    if (!response.success) {
+      const errors = response.errors;
       for (const field in errors.properties) {
         const [error] = errors.properties[field].errors;
-        setError(field, { type: "server", message: error });
+        setError(field as any, { type: "server", message: error });
       }
       const {
         errors: [serverErrors],
@@ -74,8 +75,7 @@ export default function SignUpPage() {
       return;
     }
 
-    alert(responseJson.info);
-    console.log("Dados salvos:", responseJson.dados);
+    alert(response.success);
   }
 
   const nameField = (

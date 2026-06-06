@@ -14,7 +14,7 @@ export default function LogoutPage() {
   async function logout() {
     const response = await fetch("/api/logout", { method: "POST" });
     router.refresh();
-    await delay(1000);
+    await delay(2000);
     router.replace("/");
   }
 
