@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/card";
+import { Toaster } from "sonner";
 
 export default function RegisterLayout({
   children,
@@ -12,6 +13,7 @@ export default function RegisterLayout({
           <CardContent className="p-8 md:p-10">{children}</CardContent>
         </Card>
       </div>
+      <Toaster richColors closeButton />
     </main>
   );
 }

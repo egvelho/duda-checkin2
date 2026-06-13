@@ -7,6 +7,7 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { Title } from "@/components/title";
 import type { LoginApiResponse } from "@/app/api/login/route";
+import { toast } from "sonner";
 
 const texts = {
   title: "Entrar na sua conta",
@@ -16,6 +17,10 @@ const texts = {
   },
   buttons: {
     signIn: "Sign In",
+  },
+  login: {
+    success: "Login realizado com sucesso!",
+    error: "Usuário ou senha inválidos.",
   },
 };
 
@@ -37,12 +42,12 @@ export default function SignInPage() {
     const response: LoginApiResponse = await fetchResponse.json();
 
     if (response.success) {
-      alert("Login realizado com sucesso!");
+      toast.success(texts.login.success);
       router.refresh();
       await delay(1000);
       router.replace("/");
     } else {
-      alert("Usuário ou senha inválidos!");
+      toast.error(texts.login.error);
     }
   }
 

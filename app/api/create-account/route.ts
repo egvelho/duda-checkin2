@@ -3,6 +3,8 @@ import { z } from "zod";
 import { createAccountSchema as baseCreateAccountSchema } from "@/schemas/create-account-schema";
 import { prisma, Prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { endpoint } from "@/lib/endpoint";
+import { Auth } from "@/lib/auth";
 
 const createAccountSchema = baseCreateAccountSchema.strict();
 
@@ -11,23 +13,10 @@ export type CreateAccountApiResponse = ApiResponse<
   InferZodError<typeof createAccountSchema>
 >;
 
-export async function POST(
-  request: Request,
-): Promise<NextResponse<CreateAccountApiResponse>> {
+export const POST = endpoint<CreateAccountApiResponse>(async (request) => {
   const rawForm = await request.json();
-  const result = createAccountSchema.safeParse(rawForm);
+  const formData = createAccountSchema.parse(rawForm);
 
-  if (!result.success) {
-    return NextResponse.json(
-      {
-        success: false,
-        errors: z.treeifyError(result.error),
-      },
-      { status: 422 },
-    );
-  }
-
-  const formData = result.data;
   const userExists = await prisma.teacher.findUnique({
     where: {
       email: formData.email,
@@ -54,8 +43,13 @@ export async function POST(
     data: { ...formData, password: passwordHash },
   });
 
-  return NextResponse.json({
-    success: true,
-    data: { user },
-  });
-}
+  await Auth.setAuthCookie(user);
+
+  return NextResponse.json(
+    {
+      success: true,
+      data: { user },
+    },
+    { status: 201 },
+  );
+});

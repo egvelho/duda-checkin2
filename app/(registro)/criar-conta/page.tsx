@@ -8,7 +8,10 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { FormError } from "@/components/form-error";
 import { Title } from "@/components/title";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import type { CreateAccountApiResponse } from "@/app/api/create-account/route";
+import { delay } from "@/lib/delay";
 
 const texts = {
   title: "Criar conta",
@@ -24,6 +27,7 @@ const texts = {
     passwordsMismatch: "As senhas não coincidem",
   },
   button: "Entrar",
+  createAccountSuccess: "Conta criada com sucesso!",
 };
 
 export const signUpFormSchema = createAccountSchema
@@ -38,6 +42,8 @@ export const signUpFormSchema = createAccountSchema
 type CreateAccountFormData = z.infer<typeof signUpFormSchema>;
 
 export default function SignUpPage() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -71,11 +77,14 @@ export default function SignUpPage() {
       const {
         errors: [serverErrors],
       } = errors;
-      serverErrors && alert(serverErrors);
+      serverErrors && toast.error(serverErrors);
       return;
     }
 
-    alert(response.success);
+    toast.success(texts.createAccountSuccess);
+    router.refresh();
+    await delay(1000);
+    router.replace("/");
   }
 
   const nameField = (
